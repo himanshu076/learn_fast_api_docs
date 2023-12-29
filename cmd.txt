@@ -1,0 +1,10 @@
+#1. How to migratw with alembic in fast API.
+# This is the process of manual migration.
+CMD - pip install alembic   # First inastall alembic.
+CMD - alembic init alembic   # To initilize alembic.
+CMD - alembic revision -m "first migrations"   # to create first migration.
+CMD - alembic upgrade head   # finally apply migration.
+
+Refrence Link - https://mdhvkothari.medium.com/how-to-do-the-migration-in-fastapi-5c53d3880f12
+Note - use this refrence link bolg to create your migration in FastAPI.
+
