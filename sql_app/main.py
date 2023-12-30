@@ -1,17 +1,28 @@
 from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from sqlalchemy.orm import Session
+from fastapi.testclient import TestClient
 
 from . import curd, models, schemas
-# from . import curd
-# import models
-# import schemas
 
-from . database import SessionLocal, engine
+from .database import SessionLocal, engine
 
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+
+
+@app.get("/")
+async def read_main():
+    return {"msg": "Hello World"}
+
+client = TestClient(app)
+
+def test_read_main():
+   response = client.get('/')
+   assert response.status_code == 200
+   assert response.json() == {'msg': 'Hello World'}
+
 
 @app.middleware("http")
 async def db_session_middleware(request: Request, call_next):
